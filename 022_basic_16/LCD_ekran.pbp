@@ -1,0 +1,58 @@
+'****************************************************************
+'*  Name    : UNTITLED.BAS                                      *
+'*  Author  : [select VIEW...EDITOR OPTIONS]                    *
+'*  Notice  : Copyright (c) 2021 [select VIEW...EDITOR OPTIONS] *
+'*          : All Rights Reserved                               *
+'*  Date    : 16.12.2021                                        *
+'*  Version : 1.0                                               *
+'*  Notes   :                                                   *
+'*          :                                                   *
+'****************************************************************
+
+' Set LCD Data port
+DEFINE LCD_DREG PORTB
+' Set starting Data bit (0 or 4) if 4-bit bus
+DEFINE LCD_DBIT 4
+' Set LCD Register Select port
+DEFINE LCD_RSREG PORTB
+' Set LCD Register Select bit
+DEFINE LCD_RSBIT 1
+' Set LCD Enable port
+DEFINE LCD_EREG PORTB
+' Set LCD Enable bit
+DEFINE LCD_EBIT 3
+
+DEFINE LCD_RWREG PORTB
+DEFINE LCD_RWBIT 2
+' Set LCD bus size (4 or 8 bits)
+DEFINE LCD_BITS 4
+' Set number of lines on LCD
+DEFINE LCD_LINES 2
+' Set command delay time in us
+DEFINE LCD_COMMANDUS 2000
+' Set data delay time in us
+DEFINE LCD_DATAUS 50
+
+TRISA=%00000000
+TRISB=%00000000
+syc var word
+syc=0
+PORTB.2=0
+
+Pause 200
+
+dongu:
+    LCDout $FE, 1
+    LCDOUT $FE, 2
+    LCDOUT "NEU EEM"
+    LCDOUT $FE, $C0
+    LCDOUT #syc
+    pause 10
+    syc=syc+1
+    goto dongu
+
+
+
+
+
+
